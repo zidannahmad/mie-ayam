@@ -259,13 +259,13 @@
                     <tbody class="divide-y divide-primary/10">
                       <tr class="hover:bg-primary/5 transition-colors">
                         <td class="px-5 py-3">
-                          <button class="menu-item w-full text-left font-bold hover:text-primary transition-colors" data-desc="Jeruk segar, tersedia pilihan es atau hangat sesuai selera." data-img="esjeruk.jpg" data-name="Jeruk (Es/Hangat)" data-price="5K" type="button">Jeruk (Es/Hangat)</button>
+                          <button class="menu-item w-full text-left font-bold hover:text-primary transition-colors" data-desc="Jeruk segar, tersedia pilihan es atau hangat sesuai selera." data-img="esjeruk.jpg" data-name="Jeruk" data-price="5K" type="button">Jeruk</button>
                         </td>
                         <td class="px-5 py-3 text-right font-black text-primary">5K</td>
                       </tr>
                       <tr class="hover:bg-primary/5 transition-colors">
                         <td class="px-5 py-3">
-                          <button class="menu-item w-full text-left font-bold hover:text-primary transition-colors" data-desc="Teh manis dengan pilihan es atau hangat untuk teman makan." data-img="esTeh.jpg" data-name="Teh (Es/Hangat)" data-price="4K" type="button">Teh (Es/Hangat)</button>
+                          <button class="menu-item w-full text-left font-bold hover:text-primary transition-colors" data-desc="Teh manis dengan pilihan es atau hangat untuk teman makan." data-img="esTeh.jpg" data-name="Teh" data-price="4K" type="button">Teh</button>
                         </td>
                         <td class="px-5 py-3 text-right font-black text-primary">4K</td>
                       </tr>
@@ -283,6 +283,40 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+              <div class="mx-auto w-full max-w-4xl rounded-2xl border border-primary/20 bg-white p-6 shadow-sm dark:bg-background-dark/40">
+                <div class="mb-4 flex items-center gap-2 text-primary">
+                  <span class="material-symbols-outlined">shopping_cart</span>
+                  <h3 class="text-xl font-extrabold uppercase tracking-tight">Pesanan Anda</h3>
+                </div>
+                <p class="mb-4 text-sm text-slate-600 dark:text-slate-300">Klik menu lalu tekan tombol "Tambah ke Pesanan" di popup.</p>
+                <div class="overflow-x-auto rounded-xl border border-primary/10">
+                  <table class="min-w-full text-sm">
+                    <thead class="bg-primary/5 text-slate-700 dark:text-slate-200">
+                      <tr>
+                        <th class="px-4 py-3 text-left font-bold">Menu</th>
+                        <th class="px-4 py-3 text-center font-bold">Jumlah</th>
+                        <th class="px-4 py-3 text-right font-bold">Subtotal</th>
+                        <th class="px-4 py-3 text-right font-bold">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-primary/10" id="order-list"></tbody>
+                  </table>
+                </div>
+                <p class="mt-3 text-sm text-slate-500" id="order-empty">Belum ada menu yang ditambahkan.</p>
+                <div class="mt-5 flex items-center justify-between rounded-xl bg-primary/5 px-4 py-3">
+                  <p class="font-bold">Total</p>
+                  <p class="text-2xl font-black text-primary" id="order-total">0K</p>
+                </div>
+                <div class="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+                  <input class="rounded-xl border-primary/20 bg-white text-sm focus:border-primary focus:ring-primary dark:bg-background-dark" id="order-customer-name" placeholder="Nama pemesan (opsional)" type="text"/>
+                  <input class="rounded-xl border-primary/20 bg-white text-sm focus:border-primary focus:ring-primary dark:bg-background-dark" id="order-notes" placeholder="Catatan (contoh: pedas sedang)" type="text"/>
+                </div>
+                <div class="mt-5 flex flex-wrap gap-3">
+                  <button class="rounded-xl bg-primary px-5 py-3 font-bold text-white hover:bg-primary/90" id="send-order-btn" type="button">Kirim Pesanan via WhatsApp</button>
+                  <button class="rounded-xl border border-primary/30 px-5 py-3 font-bold text-primary hover:bg-primary/5" id="clear-order-btn" type="button">Kosongkan</button>
                 </div>
               </div>
             </div>
@@ -315,6 +349,7 @@
                       <div>
                         <p class="text-xs font-bold uppercase tracking-wider text-white/60">Lokasi</p>
                         <p class="text-xl font-bold">Jl. Raya Laweyan No.75A, Krajan, Laweyan, Kec. Sumberasih, Kabupaten Probolinggo, Jawa Timur 67251</p>
+                        <p class="text-sm font-semibold text-white/90">Selatannya Lampu Merah Laweyan, Timur Jalan</p>
                       </div>
                     </div>
                   </div>
@@ -346,6 +381,17 @@
               <h4 class="mt-2 text-3xl font-black" id="menu-detail-name">Pilih menu dulu</h4>
               <p class="mt-3 leading-relaxed text-slate-600 dark:text-slate-300" id="menu-detail-desc">Klik salah satu menu makanan atau minuman untuk melihat deskripsi.</p>
               <p class="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-3xl font-black text-white" id="menu-detail-price">-</p>
+              <div class="mt-4 hidden" id="drink-temp-wrap">
+                <label class="mb-2 block text-sm font-bold text-slate-700 dark:text-slate-200" for="drink-temp-select">Pilihan Minuman</label>
+                <select class="w-full rounded-xl border-primary/20 bg-white text-sm focus:border-primary focus:ring-primary dark:bg-background-dark" id="drink-temp-select">
+                  <option value="">Pilih Es atau Hangat</option>
+                  <option value="Es">Es</option>
+                  <option value="Hangat">Hangat</option>
+                </select>
+              </div>
+              <div class="mt-6">
+                <button class="rounded-xl bg-primary px-5 py-3 font-bold text-white hover:bg-primary/90" id="add-to-order-btn" type="button">Tambah ke Pesanan</button>
+              </div>
             </div>
           </div>
         </div>
@@ -379,18 +425,108 @@
           const menuButtons = document.querySelectorAll(".menu-item");
           const detailModal = document.getElementById("menu-detail-modal");
           const closeModalButton = document.getElementById("menu-detail-close");
+          const addToOrderButton = document.getElementById("add-to-order-btn");
           const detailImage = document.getElementById("menu-detail-image");
           const detailName = document.getElementById("menu-detail-name");
           const detailDesc = document.getElementById("menu-detail-desc");
           const detailPrice = document.getElementById("menu-detail-price");
+          const orderList = document.getElementById("order-list");
+          const orderEmpty = document.getElementById("order-empty");
+          const orderTotal = document.getElementById("order-total");
+          const sendOrderButton = document.getElementById("send-order-btn");
+          const clearOrderButton = document.getElementById("clear-order-btn");
+          const customerNameInput = document.getElementById("order-customer-name");
+          const orderNotesInput = document.getElementById("order-notes");
+          const drinkTempWrap = document.getElementById("drink-temp-wrap");
+          const drinkTempSelect = document.getElementById("drink-temp-select");
+          const waNumber = "6285231327665";
 
           if (!menuButtons.length || !detailModal) return;
+
+          const orders = new Map();
+          let selectedItem = null;
+
+          const parsePriceK = (priceText) => {
+            const numeric = Number((priceText || "0").replace(/[^0-9]/g, ""));
+            return Number.isNaN(numeric) ? 0 : numeric;
+          };
+
+          const formatPriceK = (value) => `${value}K`;
+
+          const renderOrder = () => {
+            const entries = Array.from(orders.values());
+            if (!entries.length) {
+              orderList.innerHTML = "";
+              orderEmpty.classList.remove("hidden");
+              orderTotal.textContent = "0K";
+              return;
+            }
+
+            orderEmpty.classList.add("hidden");
+            let total = 0;
+            orderList.innerHTML = entries
+              .map((item) => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                return `
+                  <tr>
+                    <td class="px-4 py-3 font-semibold">${item.name}</td>
+                    <td class="px-4 py-3 text-center">
+                      <div class="inline-flex items-center gap-2">
+                        <button class="order-action h-7 w-7 rounded-md border border-primary/30 text-primary" data-action="decrease" data-name="${item.name}" type="button">-</button>
+                        <span class="w-6 text-center font-bold">${item.qty}</span>
+                        <button class="order-action h-7 w-7 rounded-md border border-primary/30 text-primary" data-action="increase" data-name="${item.name}" type="button">+</button>
+                      </div>
+                    </td>
+                    <td class="px-4 py-3 text-right font-bold text-primary">${formatPriceK(subtotal)}</td>
+                    <td class="px-4 py-3 text-right">
+                      <button class="order-action rounded-md border border-red-300 px-2 py-1 text-xs font-bold text-red-500" data-action="remove" data-name="${item.name}" type="button">Hapus</button>
+                    </td>
+                  </tr>
+                `;
+              })
+              .join("");
+            orderTotal.textContent = formatPriceK(total);
+          };
+
+          const addOrderItem = () => {
+            if (!selectedItem) return;
+            const needsTempChoice = ["Jeruk", "Teh"].includes(selectedItem.name);
+            let itemName = selectedItem.name;
+
+            if (needsTempChoice) {
+              const tempChoice = drinkTempSelect?.value || "";
+              if (!tempChoice) {
+                alert("Pilih dulu Es atau Hangat untuk minuman ini.");
+                return;
+              }
+              itemName = `${selectedItem.name} - ${tempChoice}`;
+            }
+
+            if (orders.has(itemName)) {
+              const existing = orders.get(itemName);
+              existing.qty += 1;
+            } else {
+              orders.set(itemName, { ...selectedItem, name: itemName, qty: 1 });
+            }
+            renderOrder();
+          };
 
           const openModal = (button) => {
             detailImage.src = button.dataset.img || "foto.jpeg";
             detailName.textContent = button.dataset.name || "Menu";
             detailDesc.textContent = button.dataset.desc || "Deskripsi belum tersedia.";
             detailPrice.textContent = button.dataset.price || "-";
+            selectedItem = {
+              name: button.dataset.name || "Menu",
+              price: parsePriceK(button.dataset.price || "0"),
+            };
+            if (["Jeruk", "Teh"].includes(selectedItem.name)) {
+              drinkTempWrap?.classList.remove("hidden");
+              if (drinkTempSelect) drinkTempSelect.value = "";
+            } else {
+              drinkTempWrap?.classList.add("hidden");
+            }
             if (button.dataset.fit === "contain") {
               detailImage.classList.remove("object-cover");
               detailImage.classList.add("object-contain", "bg-white", "p-6");
@@ -415,6 +551,63 @@
             });
           });
 
+          addToOrderButton?.addEventListener("click", () => {
+            addOrderItem();
+            closeModal();
+          });
+
+          orderList?.addEventListener("click", (event) => {
+            const target = event.target;
+            if (!target.classList.contains("order-action")) return;
+
+            const action = target.dataset.action;
+            const name = target.dataset.name;
+            if (!orders.has(name)) return;
+
+            if (action === "increase") {
+              orders.get(name).qty += 1;
+            } else if (action === "decrease") {
+              orders.get(name).qty -= 1;
+              if (orders.get(name).qty <= 0) orders.delete(name);
+            } else if (action === "remove") {
+              orders.delete(name);
+            }
+            renderOrder();
+          });
+
+          clearOrderButton?.addEventListener("click", () => {
+            orders.clear();
+            renderOrder();
+          });
+
+          sendOrderButton?.addEventListener("click", () => {
+            const entries = Array.from(orders.values());
+            if (!entries.length) {
+              alert("Pesanan masih kosong.");
+              return;
+            }
+
+            let total = 0;
+            const lines = entries.map((item, index) => {
+              const subtotal = item.price * item.qty;
+              total += subtotal;
+              return `${index + 1}. ${item.name} x${item.qty} = ${formatPriceK(subtotal)}`;
+            });
+
+            const customerName = customerNameInput?.value?.trim();
+            const notes = orderNotesInput?.value?.trim();
+            const messageParts = [
+              "Halo Mas Ely, saya mau pesan:",
+              ...lines,
+              `Total: ${formatPriceK(total)}`,
+            ];
+            if (customerName) messageParts.push(`Nama: ${customerName}`);
+            if (notes) messageParts.push(`Catatan: ${notes}`);
+
+            const message = encodeURIComponent(messageParts.join("\n"));
+            window.open(`https://wa.me/${waNumber}?text=${message}`, "_blank");
+          });
+
           closeModalButton?.addEventListener("click", closeModal);
 
           detailModal.addEventListener("click", (event) => {
@@ -428,6 +621,8 @@
               closeModal();
             }
           });
+
+          renderOrder();
         })();
       </script>
     </div>
